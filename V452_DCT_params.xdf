@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XDFFORMAT version="1.70">
+  <XDFHEADER>
+    <flags>0x1</flags>
+    <deftitle>V452 DCT patch parameters (stage 3i)</deftitle>
+    <description>Full 5 MB bin. Program flash.</description>
+    <BASEOFFSET offset="0" subtract="0" />
+    <DEFAULTS datasizeinbits="16" sigdigits="2" outputtype="1" signed="0" lsbfirst="0" float="0" />
+    <REGION type="0xFFFFFFFF" startaddress="0x0" size="0x500000" regionflags="0x0" name="Binary File" desc="" />
+    <CATEGORY index="0x0" name="DCT patch - INJ (torque requests)" />
+    <CATEGORY index="0x1" name="DCT patch - IGN (SMG emulation)" />
+  </XDFHEADER>
+  <XDFCONSTANT uniqueid="0x1" flags="0x0">
+    <title>DCT patch enable bits</title>
+    <description>Bit 0 (1): caps, modes 3/0xC. Bit 1 (2): floors, mode 4. Bit 2 (4): speed control, mode 6. Bit 3 (8): send 0x34F handbrake released (DCT fault CF25). Bit 4 (16): 0x1A3 in E9x format, DLC 5 with alive + checksum (DCT fault CF21). Bit 5 (32): M symbol in P (see M symbol mode). Bit 6 (64): launch limiter. Bit 7 (128): show N in P (DME sends 0x1D2 N between the DCT P frames; needs cluster EGS_ALIVE_ZAEHLER and EGS_CSUM_MONITOR off). 255 = all, 0 = off.</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x00" mmedaddress="0x126004" mmedelementsizebits="8" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units></units>
+    <decimalpl>0</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x2" flags="0x0">
+    <title>DCT request max age</title>
+    <description>DSC decode calls (5 ms each) without a new valid 0xB8 before a request is dropped.</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x00" mmedaddress="0x126006" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>calls</units>
+    <decimalpl>0</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x3" flags="0x0">
+    <title>Cap ramp-out rate</title>
+    <description>Cap release after the request ends, per 5 ms call.</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x01" mmedaddress="0x126008" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>Nm/call</units>
+    <decimalpl>1</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X/2">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x4" flags="0x0">
+    <title>Cap release level</title>
+    <description>Ramp-out ends once both caps reach this torque.</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x01" mmedaddress="0x12600A" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>Nm</units>
+    <decimalpl>1</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X/2">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x5" flags="0x0">
+    <title>Floor max (mode 4)</title>
+    <description>Limit for DCT mode 4 floors. K_MD_MSR_MAX and K_MD_MSR_MAX_E2 also apply.</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x01" mmedaddress="0x12600C" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>Nm</units>
+    <decimalpl>1</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X/2">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x6" flags="0x0">
+    <title>Mode 6 gain</title>
+    <description>Speed control: floor = gain x (target - n) + base.</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x01" mmedaddress="0x12600E" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>Nm/rpm</units>
+    <decimalpl>3</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X/512">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x7" flags="0x0">
+    <title>Mode 6 base torque</title>
+    <description>Floor at zero speed error.</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x01" mmedaddress="0x126010" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>Nm</units>
+    <decimalpl>1</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X/2">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x8" flags="0x0">
+    <title>Mode 6 floor max</title>
+    <description>Upper limit of the mode 6 floor. K_MD_MSR_MAX and K_MD_MSR_MAX_E2 also apply.</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x01" mmedaddress="0x126012" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>Nm</units>
+    <decimalpl>1</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X/2">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x9" flags="0x0">
+    <title>Mode 6 floor min</title>
+    <description>Lower limit of the mode 6 floor (engine above target).</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x01" mmedaddress="0x126014" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>Nm</units>
+    <decimalpl>1</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X/2">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0xA" flags="0x0">
+    <title>Clutch closed: slip to close</title>
+    <description>|n - input speed| below this -> clutch closed.</description>
+    <CATEGORYMEM index="0" category="2" />
+    <EMBEDDEDDATA mmedtypeflags="0x00" mmedaddress="0x382004" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>rpm</units>
+    <decimalpl>0</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0xB" flags="0x0">
+    <title>Clutch closed: slip to open</title>
+    <description>Closed state left above this slip.</description>
+    <CATEGORYMEM index="0" category="2" />
+    <EMBEDDEDDATA mmedtypeflags="0x00" mmedaddress="0x382006" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>rpm</units>
+    <decimalpl>0</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0xC" flags="0x0">
+    <title>Clutch closed: min input speed</title>
+    <description>Input speed needed before the clutch can count as closed.</description>
+    <CATEGORYMEM index="0" category="2" />
+    <EMBEDDEDDATA mmedtypeflags="0x00" mmedaddress="0x382008" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>rpm</units>
+    <decimalpl>0</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0xD" flags="0x0">
+    <title>m_kupp_max sent in 0x323</title>
+    <description>Clutch torque range sent to the SMG logic (raw x 5 Nm).</description>
+    <CATEGORYMEM index="0" category="2" />
+    <EMBEDDEDDATA mmedtypeflags="0x00" mmedaddress="0x38200A" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>Nm</units>
+    <decimalpl>0</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X*5">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0xE" flags="0x0">
+    <title>DCT data stale limit</title>
+    <description>SMG getter calls without new DCT data before falling back to the CAN getter.</description>
+    <CATEGORYMEM index="0" category="2" />
+    <EMBEDDEDDATA mmedtypeflags="0x00" mmedaddress="0x38200C" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>calls</units>
+    <decimalpl>0</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x20" flags="0x0">
+    <title>M symbol mode in P</title>
+    <description>0 = stock (only M Drive), 1 = steady in P, 2 = flashing in P. Needs enable bit 5.</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x00" mmedaddress="0x126005" mmedelementsizebits="8" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units></units>
+    <decimalpl>0</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x21" flags="0x0">
+    <title>Launch rpm</title>
+    <description>Engine speed held while the DCT reports launch preparation (0xBA B7 bit 7, flag shown). 0 = use the DCT mode 6 target.</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x00" mmedaddress="0x126016" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>rpm</units>
+    <decimalpl>0</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x22" flags="0x0">
+    <title>Launch gain</title>
+    <description>Cap = base + gain x (launch rpm - n).</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x01" mmedaddress="0x126018" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>Nm/rpm</units>
+    <decimalpl>3</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X/512">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x23" flags="0x0">
+    <title>Launch base torque</title>
+    <description>Cap at exactly launch rpm (engine friction with the clutch open).</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x01" mmedaddress="0x12601A" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>Nm</units>
+    <decimalpl>1</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X/2">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x24" flags="0x0">
+    <title>Launch cap max</title>
+    <description>Upper limit of the launch cap (below launch rpm).</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x01" mmedaddress="0x12601C" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>Nm</units>
+    <decimalpl>1</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X/2">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x25" flags="0x0">
+    <title>Launch cap min</title>
+    <description>Lower limit of the launch cap (above launch rpm).</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x01" mmedaddress="0x12601E" mmedelementsizebits="16" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>Nm</units>
+    <decimalpl>1</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X/2">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+  <XDFCONSTANT uniqueid="0x26" flags="0x0">
+    <title>N in P: send offset</title>
+    <description>Delay after each DCT 0x1D2 (P) before the DME sends its N frame, in 5 ms steps (20 = 100 ms, middle of the DCT 200 ms cycle). Sent once per DCT frame, retried for 10 steps if the CAN object is busy.</description>
+    <CATEGORYMEM index="0" category="1" />
+    <EMBEDDEDDATA mmedtypeflags="0x00" mmedaddress="0x12603C" mmedelementsizebits="8" mmedmajorstridebits="0" mmedminorstridebits="0" />
+    <units>x 5 ms</units>
+    <decimalpl>0</decimalpl>
+    <datatype>0</datatype>
+    <unittype>0</unittype>
+    <DALINK index="0" />
+    <MATH equation="X">
+      <VAR id="X" />
+    </MATH>
+  </XDFCONSTANT>
+</XDFFORMAT>
