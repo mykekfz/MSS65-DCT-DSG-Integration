@@ -34,6 +34,7 @@ Made by **ZiMMie** for M5Board and Nam3Forum. Free to use, non-commercial only (
 - [How it went](#how-it-went)
 - [What didn't work](#what-didnt-work)
 - [Still to do](#still-to-do)
+- [Shout-out](#shout-out)
 - [Licence](#licence)
 
 ---
@@ -73,7 +74,7 @@ Build: **stage 3i**
 - RSA bypass
 - E90 M3 DCT on stock software (DKG_90), no TCU flash, no TCU coding
 - Longitudinal acceleration sensor wired to the DME the same way as the manual car ([wiring](#acceleration-sensor-wiring))
-- MSS6x Flasher
+- [MSS6x Flasher](https://nam3forum.com/forums/forum/e9x-2008-2013/e9x-coding-tuning/11026-mss6x-flasher-now-released) by Terraphantm
 - TunerPro, INPA/Tool32, NCS Expert
 
 ## Acceleration sensor wiring
@@ -566,6 +567,12 @@ Tools: Ghidra (PowerPC for DME and DCT, [C166 module](https://github.com/esaulen
 - Check the oil level measurement now that it gets acceleration.
 - Read RAM to see whether the DME takes the gear from the rebuilt `0x322` or works it out from the ratio. Either way it ends up with the same gear.
 - Maybe a CAN gateway for N/P on the display.
+
+---
+
+## Shout-out
+
+Big thanks to **Terraphantm** for the [MSS6x Flasher](https://nam3forum.com/forums/forum/e9x-2008-2013/e9x-coding-tuning/11026-mss6x-flasher-now-released). Every full read, full flash and calibration flash in this project was done with his tool. Without it, none of this would have made it onto the car. Go thank him on Nam3Forum.
 
 ---
 
